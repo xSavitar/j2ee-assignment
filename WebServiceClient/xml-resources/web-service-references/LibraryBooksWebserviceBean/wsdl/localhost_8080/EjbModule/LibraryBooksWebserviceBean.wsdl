@@ -1,0 +1,61 @@
+<definitions name='LibraryService' targetNamespace='http://webservice.eduLibrary.com/' xmlns='http://schemas.xmlsoap.org/wsdl/' xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/' xmlns:tns='http://webservice.eduLibrary.com/' xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
+ <types>
+  <xs:schema targetNamespace='http://webservice.eduLibrary.com/' version='1.0' xmlns:tns='http://webservice.eduLibrary.com/' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+   <xs:element name='books' type='tns:books'/>
+   <xs:element name='getBooks' type='tns:getBooks'/>
+   <xs:element name='getBooksResponse' type='tns:getBooksResponse'/>
+   <xs:complexType name='getBooks'>
+    <xs:sequence/>
+   </xs:complexType>
+   <xs:complexType name='getBooksResponse'>
+    <xs:sequence>
+     <xs:element maxOccurs='unbounded' minOccurs='0' name='return' type='tns:books'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='books'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='id' type='xs:int'/>
+     <xs:element minOccurs='0' name='image' type='xs:base64Binary'/>
+     <xs:element minOccurs='0' name='name' type='xs:string'/>
+     <xs:element minOccurs='0' name='publisher' type='tns:publisher'/>
+     <xs:element minOccurs='0' name='xml' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name='publisher'>
+    <xs:sequence>
+     <xs:element minOccurs='0' name='address' type='xs:string'/>
+     <xs:element minOccurs='0' name='name' type='xs:string'/>
+    </xs:sequence>
+   </xs:complexType>
+  </xs:schema>
+ </types>
+ <message name='LibraryBooksWebserviceBean_getBooksResponse'>
+  <part element='tns:getBooksResponse' name='getBooksResponse'></part>
+ </message>
+ <message name='LibraryBooksWebserviceBean_getBooks'>
+  <part element='tns:getBooks' name='getBooks'></part>
+ </message>
+ <portType name='LibraryBooksWebserviceBean'>
+  <operation name='getBooks' parameterOrder='getBooks'>
+   <input message='tns:LibraryBooksWebserviceBean_getBooks'></input>
+   <output message='tns:LibraryBooksWebserviceBean_getBooksResponse'></output>
+  </operation>
+ </portType>
+ <binding name='LibraryBooksWebserviceBeanBinding' type='tns:LibraryBooksWebserviceBean'>
+  <soap:binding style='document' transport='http://schemas.xmlsoap.org/soap/http'/>
+  <operation name='getBooks'>
+   <soap:operation soapAction=''/>
+   <input>
+    <soap:body use='literal'/>
+   </input>
+   <output>
+    <soap:body use='literal'/>
+   </output>
+  </operation>
+ </binding>
+ <service name='LibraryService'>
+  <port binding='tns:LibraryBooksWebserviceBeanBinding' name='LibraryBooksWebserviceBeanPort'>
+   <soap:address location='http://127.0.0.1:8080/EjbModule/LibraryBooksWebserviceBean'/>
+  </port>
+ </service>
+</definitions>
